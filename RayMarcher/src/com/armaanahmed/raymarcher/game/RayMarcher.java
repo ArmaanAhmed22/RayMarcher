@@ -8,7 +8,8 @@ import com.armaanahmed.raymarcher.math.Vector3;
 import com.armaanahmed.raymarcher.objects.Camera;
 import com.armaanahmed.raymarcher.objects.shapes.Shape;
 import com.armaanahmed.raymarcher.objects.shapes.Sphere;
-
+//https://stackoverflow.com/questions/14094042/calculating-camera-ray-direction-to-3d-world-pixel
+//Applied some of the basic advice from user Sorceror
 public class RayMarcher {
 	
 	private static final int MAX_MARCHES = 100;
@@ -21,7 +22,7 @@ public class RayMarcher {
 	private ArrayList<Shape> shapes;
 	
 	public RayMarcher(Vector2 _screenDim) {
-		cam = new Camera( new Vector3(-21,0,0), new Vector3(1,0,0),Math.PI/30, true);
+		cam = new Camera( Vector3.ZERO, new Vector3(1,0,0),Math.PI/30, true);
 		screenDim = _screenDim;
 		
 		shapes = new ArrayList<Shape>();
