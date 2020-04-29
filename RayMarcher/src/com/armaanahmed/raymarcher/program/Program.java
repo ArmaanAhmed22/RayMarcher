@@ -21,6 +21,7 @@ import javax.swing.WindowConstants;
 
 import com.armaanahmed.raymarcher.game.Game;
 import com.armaanahmed.raymarcher.handlers.awthandlers.WindowHandler;
+import com.armaanahmed.raymarcher.math.Vector2;
 
 public class Program {
 
@@ -181,6 +182,10 @@ public class Program {
 		
 		public int getHeight() {
 			return height;
+		}
+		
+		public Vector2 getDimensions() {
+			return new Vector2(width, height);
 		}
 
 	}
