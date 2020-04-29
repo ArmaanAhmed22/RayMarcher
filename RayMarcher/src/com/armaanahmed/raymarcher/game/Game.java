@@ -11,6 +11,8 @@ import com.armaanahmed.raymarcher.program.Program;
 
 public class Game {
 	
+	private RayMarcher rayMarcher;
+	
 	private ThreadPoolExecutor renderThread;
 	private static final int NUM_THREADS = 25;
 	
@@ -20,6 +22,8 @@ public class Game {
 		renderThread = (ThreadPoolExecutor) Executors.newFixedThreadPool(NUM_THREADS);
 		
 		screen = Program.getScreen();
+		
+		rayMarcher = new RayMarcher(screen.getDimensions());
 	}
 
 	public void update() {
@@ -30,8 +34,8 @@ public class Game {
 		
 		CountDownLatch latch = new CountDownLatch(NUM_THREADS);
 		
-		int width = screen.getWidth();
-		int height = screen.getHeight();
+		final int width = screen.getWidth();
+		final int height = screen.getHeight();
 		
 		Color color = new Color((int) (255*Math.random()));
 		
@@ -42,6 +46,7 @@ public class Game {
 			renderThread.execute(() -> {
 				for (int j = index; j < index + increment; j++) {
 					screen.setPixel(j, color);
+					screen.setPixel(j, rayMarcher.rayToWorld(rayMarcher.pixelToRay(j % width, j / width)));
 				}
 				latch.countDown();
 			});
